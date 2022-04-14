@@ -1,0 +1,84 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+
+            <div class="row tm-row">
+            {% for posts in post %}
+                <article class="col-12 col-md-6 tm-post">
+                    <hr class="tm-hr-primary">
+                    <a href="{% url "post" posts.id %}" class="effect-lily tm-post-link tm-pt-60">
+                        <div class="tm-post-link-inner">
+                            <img src="{{ posts.image.url }}" alt="Image" class="img-fluid">
+                        </div>
+                        {% if posts.status %}
+                        <span class="position-absolute tm-new-badge">NEW</span>
+                        {% endif %}
+                        <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ posts.title }}</h2>
+                    </a>
+                        <p class="tm-pt-30">
+                        {{ posts.text | slice:"50" }}
+                        </p>
+                    <div class="d-flex justify-content-between tm-pt-45">
+                        {% for tag in posts.tags.all %}
+                        <span class="tm-color-primary">{{ tag }}</span>
+                            {% endfor %}
+                        <span class="tm-color-primary">{{ posts.date }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>{{ posts.get_comment_count }} comments</span>
+                        <span><a href="{% url 'user_Profile' posts.author %}">by {{ posts.author }}</a></span>
+                    </div>
+                </article>
+                {% endfor %}
+
+
+
+
+
+
+            </div>
+            <div class="row tm-row tm-mt-100 tm-mb-75">
+                <div class="tm-prev-next-wrapper">
+{#                    <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>#}
+{#                    <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>#}
+                </div>
+                <div class="tm-paging-wrapper">
+{#                    <span class="d-inline-block mr-3">Page</span>#}
+                    <nav class="tm-paging-nav d-inline-block">
+                        <ul>
+                            {% if post.has_previous %}
+
+                            <li class="tm-paging-item active">
+                                <a href="?page=1" class="mb-2 tm-btn tm-paging-link"><</a>
+                            </li>
+                            <li class="tm-paging-item">
+                                <a href="?page={{ post.previous_page_number }}" class="mb-2 tm-btn tm-paging-link">{{ post.previous_page_number }}</a>
+                            </li>
+                                {% else %}
+                            <li class="tm-paging-item">
+                                <a href="?page=1" class="mb-2 tm-btn tm-paging-link">1</a>
+                            </li>
+                            {% endif %}
+
+                            <li>{{ post.number }} of {{ post.paginator.num_pages }}</li>
+
+                            {% if post.has_next %}
+
+                            <li class="tm-paging-item">
+                                <a href="?page={{ post.next_page_number }}" class="mb-2 tm-btn tm-paging-link">{{ post.next_page_number }}</a>
+                            </li>
+                                <li class="tm-paging-item">
+                                <a href="?page={{ post.paginator.num_pages }}" class="mb-2 tm-btn tm-paging-link">></a>
+                            </li>
+                            {% else %}
+                            <li class="tm-paging-item">
+                                <a href="?page={{ post.paginator.num_pages }}" class="mb-2 tm-btn tm-paging-link">{{ post.number }}</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+{#                    {% for p in post.obj.number %}#}
+                </div>                
+            </div>            
+         {% endblock content %}
