@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fw9wzg1s#$osbq7kuwu@p5adchq)rx16j35dm7sd2_ud%_x(s8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['extrablok.herokuapp.com','127.0.0.1:8000']
+ALLOWED_HOSTS = ['extrablok.herokuapp.com', '127.0.0.1:8000']
 
 
 # Application definition
@@ -134,7 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 CKEDITOR_UPLOAD_PATH = "ckeditor_uploads/"
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
