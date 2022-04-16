@@ -24,6 +24,8 @@ urlpatterns = [
     path('',include('mainapp.urls')),
     path('accounts/',include('accounts.urls')),
     # path('social/',include('social_django.urls',namespace='social')),
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # SOCIAL_AUTH_URL_NAMESPACE = 'social'
