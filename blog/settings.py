@@ -26,12 +26,11 @@ SECRET_KEY = 'django-insecure-fw9wzg1s#$osbq7kuwu@p5adchq)rx16j35dm7sd2_ud%_x(s8
 DEBUG = False
 
 ALLOWED_HOSTS = []
-MIDDLEWARE_CLASSES = 'whitenoise.middleware.WhiteNoiseMiddleware'
+MIDDLEWARE_CLASSES = ('whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,7 +49,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
